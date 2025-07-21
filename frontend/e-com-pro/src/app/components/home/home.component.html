@@ -1,0 +1,37 @@
+
+<div class="home-container">
+
+  <!-- User Banner -->
+  <div class="user-banner">
+    <h1>Welcome to GreenCart</h1>
+    <p>Your one-stop online store for everything!</p>
+  </div>
+
+  <!-- Product Grid -->
+  <div class="product-grid">
+    <mat-card 
+      class="product-card" 
+      *ngFor="let product of products" 
+      [@fadeInAnimation]>
+      
+      <img mat-card-image [src]="product.image" alt="Product Image" />
+      <mat-card-title class="mat-card-pName">{{ product.name }}</mat-card-title>
+      <mat-card-subtitle class="pPrice">Price:-₹{{ product.price }}</mat-card-subtitle>
+      <mat-card-content>
+        <button mat-button class="Dbtn" style="background-color:#bad4f6d3 ;"><p>Description:-</p></button>{{ product.description }}
+         <span class="info-box">
+        <p>Hello i am spam box</p>
+        </span>
+        
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button style="background-color: rgba(255, 166, 0, 0.798);">Buy Now</button>
+        <button mat-raised-button (click)="addToCart(product)"> <i class="fas fa-shopping-cart"></i></button>
+        <button mat-raised-button>Rating</button>
+      </mat-card-actions>
+      
+    </mat-card>
+     
+  </div>
+
+</div>

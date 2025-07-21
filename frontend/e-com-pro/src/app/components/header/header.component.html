@@ -1,0 +1,30 @@
+<nav class="navbar">
+  <div class="nav-left">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPgSfUAo_uWMMQ11mIb8QeLYEfdanxWWmZ0g&s" alt="Logo" class="logo" (click)="navigate()"/>
+    <span class="site-name">GreenCart</span>
+  </div>
+
+  <div class="nav-center" *ngIf="isAuthenticated">
+    <input type="text" placeholder="Search..." class="search-bar" />
+    <button class="search-btn"><i class="fas fa-search"></i></button>
+  </div>
+
+  <div class="nav-right" *ngIf="isAuthenticated">
+    <button class="icon-button" (click)="toggleDropdown()">
+      <i class="fas fa-ellipsis-v"></i>
+    </button>
+        <div class="dropdown-menu" *ngIf="isDropdownOpen">
+      <button>Order History</button>
+      <button>Become a Seller</button>
+      <button>About Us</button>
+      <button (click)="logout()">Logout</button>
+    </div>
+
+  <img src="https://www.freeiconspng.com/uploads/am-a-19-year-old-multimedia-artist-student-from-manila--21.png" alt="Profile" class="profile"  (click)="profileBtnClick()"/>
+
+    <button class="icon-button" (click)="toggleCart()">
+      <i class="fas fa-shopping-cart"></i>
+      <span>{{ cartItemCount }}</span>
+    </button>
+  </div>
+</nav>

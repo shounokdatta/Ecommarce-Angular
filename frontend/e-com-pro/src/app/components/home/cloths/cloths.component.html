@@ -1,0 +1,14 @@
+<div class="cloths-container" style="display: flex; flex-wrap: wrap; gap: 16px;">
+  <mat-card *ngFor="let item of clothsItems" style="width: 250px;">
+    <img mat-card-image [src]="item.image" alt="{{ item.name }}" />
+    <mat-card-content>
+      <h3>{{ item.name }}</h3>
+      <p>₹ {{ item.price }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary">Add to Cart</button>
+      <button mat-raised-button color="accent" style="margin-left: 8px;">Buy Now</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+

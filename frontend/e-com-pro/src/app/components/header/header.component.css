@@ -1,0 +1,124 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #2e7d32; /* Green Theme */
+  padding: 10px 20px;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  border-bottom-left-radius:  15px; /* Rounded corners */
+  border-bottom-right-radius:  15px; /* Rounded corners */
+  transition: box-shadow 0.3s ease;
+}
+
+.navbar:hover {
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  margin-right: 10px;
+  transition: transform 0.3s ease;
+}
+
+
+
+.site-name {
+  font-size: 20px;
+  font-weight: bold;
+  font-family: "Press Start 2P", monospace;
+}
+
+.nav-center {
+  display: flex;
+  align-items: center;
+}
+
+.search-bar {
+  width: 250px;
+  padding: 8px 12px;
+  border-radius: 20px 0 0 20px;
+  border: none;
+  outline: none;
+}
+
+.search-btn {
+  padding: 8px 12px;
+  background-color: #1b5e20;
+  border: none;
+  border-radius: 0 20px 20px 0;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-btn:hover {
+  background-color: #388e3c;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.icon-button:hover {
+  transform: scale(1.1);
+  color: #c8e6c9;
+}
+
+.profile {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 2px solid white;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  opacity: 1;
+}
+
+.profile:hover {
+  transform: scale(1.1);
+}
+.dropdown-menu {
+  position: absolute;
+  background-color: white;
+  color: black;
+  right: 60px; /* Adjust as needed */
+  top: 60px;   /* Adjust as needed */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+}
+.dropdown-menu button {
+  background: none;
+  border: none;
+  padding: 10px;
+  text-align: left;
+  width: 150px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.dropdown-menu button:hover {
+  background-color: #c8e6c9; /* Light green on hover */
+}
