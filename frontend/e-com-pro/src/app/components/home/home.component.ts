@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component,OnInit  } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { CartService } from '../../services/cart.service';
+import { ProductService } from '../../services/product.service'
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -14,15 +15,20 @@ import { CartService } from '../../services/cart.service';
     ])
   ]
 })
-export class HomeComponent {
-  constructor(private readonly cartService: CartService) {}
+export class HomeComponent implements OnInit{
+   products: any[] = [];
+  constructor(private readonly cartService: CartService,
+  private readonly productService: ProductService // ✅ Inject ProductService
 
-  products = [
-    { name: 'Wireless Headphones', price: 2999, description: 'High-quality audio with noise cancellation.', image: 'https://images.pexels.com/photos/3945667/pexels-photo-3945667.jpeg?cs=srgb&dl=pexels-cottonbro-3945667.jpg&fm=jpg' },
-    { name: 'Smart Watch', price: 4999, description: 'Track fitness & notifications on the go.', image: 'assets/images/smartwatch.jpg' },
-    { name: 'Gaming Mouse', price: 1499, description: 'Precision tracking with RGB lights.', image: 'assets/images/mouse.jpg' },
-    { name: 'Gaming keyboard', price: 2499, description: 'Precision tracking with RGB lights.', image: 'https://images.pexels.com/photos/3945667/pexels-photo-3945667.jpeg?cs=srgb&dl=pexels-cottonbro-3945667.jpg&fm=jpg' },
-  ];
+  ) {}
+    ngOnInit(): void { // ✅ New lifecycle method to fetch data on load
+    this.productService.getProducts().subscribe({
+      next: (res) => this.products = res, // ✅ Load products from backend
+      error: (err) => console.error('Error loading products:', err) // ✅ Handle errors
+    });
+  }
+
+ 
   addToCart(product: any) {
     this.cartService.addItem(product);
   }

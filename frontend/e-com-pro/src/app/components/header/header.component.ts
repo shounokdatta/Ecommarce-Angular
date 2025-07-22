@@ -1,21 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { filter, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { AuthService } from '../auth.service';
-import { CartService } from '../../services/cart.service';
+import { CartService, CartItem } from '../../services/cart.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   isDarkTheme = false;
   isLoginPage = false;
   isAuthenticated = false;
   isDropdownOpen = false;
-  cartItemCount = 0; 
-  isCartOpen=false;
+  isCartOpen = false;
+  cartItemCount = 0;
+  cartItems: CartItem[] = [];
+  total = 0;
+
+  private destroy$ = new Subject<void>();
 
   constructor(
     private readonly cartService: CartService,
@@ -24,7 +29,8 @@ export class HeaderComponent implements OnInit {
   ) {
     // Detect if current page is login
     this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
+      filter(event => event instanceof NavigationEnd),
+      takeUntil(this.destroy$)
     ).subscribe((event: NavigationEnd) => {
       this.isLoginPage = (event as NavigationEnd).urlAfterRedirects === '/login';
     });
@@ -32,14 +38,15 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     // Subscribe to auth status
-    this.authService.authStatus.subscribe(status => {
-      this.isAuthenticated = status;
-    });
+    this.authService.authStatus.pipe(takeUntil(this.destroy$))
+      .subscribe(status => this.isAuthenticated = status);
 
-    // Subscribe to cart count changes
-    this.cartService.cartCount$.subscribe(count => {
-      this.cartItemCount = count;
-    });
+    // Subscribe to cart count
+    this.cartService.cartCount$.pipe(takeUntil(this.destroy$))
+      .subscribe(count => this.cartItemCount = count);
+
+    // Load initial cart data
+    this.loadCart();
   }
 
   toggleTheme() {
@@ -57,13 +64,39 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+    this.router.navigate(['/login']);
   }
 
   navigate() {
     this.router.navigate(['/home']);
   }
 
-  toggleCart(){
+  toggleCart() {
     this.isCartOpen = !this.isCartOpen;
+  }
+
+  loadCart() {
+    this.cartItems = this.cartService.getItems();
+    this.total = this.cartService.getTotal();
+  }
+
+  increaseQuantity(item: CartItem) {
+    this.cartService.addItem(item);
+    this.loadCart();
+  }
+
+  decreaseQuantity(item: CartItem) {
+    this.cartService.decreaseItem(item.id);
+    this.loadCart();
+  }
+
+  removeItem(id: number) {
+    this.cartService.removeItem(id);
+    this.loadCart();
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

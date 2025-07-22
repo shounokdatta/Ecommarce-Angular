@@ -14,7 +14,7 @@ export interface CartItem {
 })
 export class CartService {
   private items: CartItem[] = [];
-  private cartCount = new BehaviorSubject<number>(0);
+  private readonly cartCount = new BehaviorSubject<number>(0);
   cartCount$ = this.cartCount.asObservable();
 
   constructor() {}
@@ -47,6 +47,17 @@ export class CartService {
   removeItem(id: number): void {
     this.items = this.items.filter(item => item.id !== id);
     this.updateCartCount();
+  }
+   decreaseItem(id: number) {
+    const item = this.items.find(i => i.id === id);
+    if (item) {
+      if (item.quantity > 1) {
+        item.quantity -= 1;
+      } else {
+        this.removeItem(id);
+      }
+      this.updateCartCount();
+    }
   }
 
   // Clear the entire cart

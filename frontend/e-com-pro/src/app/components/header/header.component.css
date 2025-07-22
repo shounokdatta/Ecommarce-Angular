@@ -122,3 +122,52 @@
 .dropdown-menu button:hover {
   background-color: #c8e6c9; /* Light green on hover */
 }
+.cart-container{
+   position: fixed;
+ right: 60px; /* Adjust as needed */
+  top: 60px;   /* Adjust as needed */
+  width: 250px;
+  height: auto;
+  background: white;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  padding: 20px;
+  border-radius: 12px;
+  transition: top 0.4s ease;
+  z-index: 1000;
+}
+.item-card {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  padding: 10px;
+  margin-bottom: 15px;
+  transition: transform 0.2s ease;
+}
+
+
+.item-img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 15px;
+}
+
+.item-details h4 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.item-details p {
+  margin: 5px 0 0;
+  color: #444;
+}
+.item-card button{
+  margin-top: 8px;
+  background-color:red;
+  color: white;
+
+
+}

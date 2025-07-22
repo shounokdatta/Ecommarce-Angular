@@ -27,7 +27,6 @@ export class AuthService {
     console.log("AuthService: login called");
     const isValid = this.newUsers.some(user => user.email === email && user.password === password);
     console.log('Login result:', isValid);
-
     if (isValid) {
       localStorage.setItem('token', 'mock-token');
       this.authState.next(true);

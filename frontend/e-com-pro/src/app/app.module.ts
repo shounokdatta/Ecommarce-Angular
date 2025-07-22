@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms'; // ✅ Import this
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http'; // ✅ Import this
+
 
 // Import your components here
 import { LoginComponent } from './components/login/login.component';
@@ -16,14 +18,9 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { MenComponent } from './components/home/men/men.component';
-import { WomenComponent } from './components/home/women/women.component';
-import { ClothsComponent } from './components/home/cloths/cloths.component';
-import { ElectronicsComponent } from './components/home/electronics/electronics.component';
-import { HouseholdComponent } from './components/home/household/household.component';
-import { KidsComponent } from './components/home/kids/kids.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { ProfileComponent } from './components/profile/profile.component';
+
 
 @NgModule({
   declarations: [
@@ -32,12 +29,6 @@ import { ProfileComponent } from './components/profile/profile.component';
     HomeComponent,
     HeaderComponent,
     ProductCardComponent,
-    MenComponent,
-    WomenComponent,
-    ClothsComponent,
-    ElectronicsComponent,
-    HouseholdComponent,
-    KidsComponent,
     SignupComponent,
     ProfileComponent,
     
@@ -48,7 +39,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     FormsModule, // ✅ Add this to imports
     MatCardModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    HttpClientModule,
   ],
   providers: [
     provideAnimationsAsync()
