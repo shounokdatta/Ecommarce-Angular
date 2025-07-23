@@ -1,173 +1,198 @@
+/* === NAVBAR === */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #2e7d32; /* Green Theme */
-  padding: 10px 20px;
-  color: white;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  border-bottom-left-radius:  15px; /* Rounded corners */
-  border-bottom-right-radius:  15px; /* Rounded corners */
-  transition: box-shadow 0.3s ease;
+  border-bottom-left-radius:15px ;
+  border-bottom-right-radius:15px ;
+  padding: 10px 25px;
+  background-color: #56ab2f;
+  position: relative;
+  flex-wrap: wrap;
 }
 
-.navbar:hover {
-  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-}
-
+/* Left */
 .nav-left {
   display: flex;
   align-items: center;
 }
-
 .logo {
-  width: 40px;
   height: 40px;
-  border-radius: 8px;
+  cursor: pointer;
   margin-right: 10px;
-  transition: transform 0.3s ease;
 }
-
-
-
 .site-name {
-  font-size: 20px;
+  font-size: 1.5rem;
   font-weight: bold;
-  font-family: "Press Start 2P", monospace;
+  color: #2b2b2b;
 }
 
+/* Center */
 .nav-center {
   display: flex;
   align-items: center;
+  flex: 1;
+  justify-content: center;
 }
-
 .search-bar {
-  width: 250px;
-  padding: 8px 12px;
-  border-radius: 20px 0 0 20px;
-  border: none;
-  outline: none;
+  padding: 5px 10px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  width: 200px;
 }
-
 .search-btn {
-  padding: 8px 12px;
-  background-color: #1b5e20;
-  border: none;
-  border-radius: 0 20px 20px 0;
+  margin-left: 5px;
+  background-color: #2196f3;
   color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 5px 10px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
-.search-btn:hover {
-  background-color: #388e3c;
-}
-
+/* Right */
 .nav-right {
   display: flex;
   align-items: center;
   gap: 15px;
 }
-
 .icon-button {
   background: none;
   border: none;
-  color: white;
-  font-size: 20px;
+  font-size: 1.2rem;
   cursor: pointer;
-  transition: transform 0.3s ease, color 0.3s ease;
 }
-
-.icon-button:hover {
-  transform: scale(1.1);
-  color: #c8e6c9;
-}
-
 .profile {
-  width: 35px;
   height: 35px;
+  width: 35px;
   border-radius: 50%;
-  border: 2px solid white;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-  opacity: 1;
+  cursor: pointer;
 }
 
-.profile:hover {
-  transform: scale(1.1);
-}
+/* === DROPDOWN MENU === */
 .dropdown-menu {
   position: absolute;
+  top: 60px;
+  right: 100px;
   background-color: white;
-  color: black;
-  right: 60px; /* Adjust as needed */
-  top: 60px;   /* Adjust as needed */
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  border: 1px solid #ccc;
   padding: 10px;
+  z-index: 1000;
   display: flex;
   flex-direction: column;
-  z-index: 1000;
+  gap: 10px;
 }
 .dropdown-menu button {
-  background: none;
   border: none;
-  padding: 10px;
-  text-align: left;
-  width: 150px;
+  background: none;
   cursor: pointer;
-  transition: background-color 0.3s;
+  text-align: left;
 }
 
-.dropdown-menu button:hover {
-  background-color: #c8e6c9; /* Light green on hover */
-}
-.cart-container{
-   position: fixed;
- right: 60px; /* Adjust as needed */
-  top: 60px;   /* Adjust as needed */
-  width: 250px;
-  height: auto;
+/* === CART === */
+.cart-container {
+  position: absolute;
+  top: 60px;
+  right: 10px;
   background: white;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  padding: 20px;
-  border-radius: 12px;
-  transition: top 0.4s ease;
+  width: 300px;
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  padding: 10px;
   z-index: 1000;
 }
 .item-card {
   display: flex;
-  align-items: center;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  padding: 10px;
-  margin-bottom: 15px;
-  transition: transform 0.2s ease;
+  gap: 10px;
+  margin-bottom: 10px;
 }
-
-
 .item-img {
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   object-fit: cover;
+}
+.item-details {
+  flex: 1;
+}
+.cart-total {
+  text-align: right;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* === SELLER FORM POPUP === */
+.seller-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 400px;
+  max-height: 90vh;
+  background-color: #fff;
+  border: 2px solid #19d222;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 25px;
+  z-index: 9999;
   border-radius: 8px;
-  margin-right: 15px;
+  overflow-y: auto;
 }
 
-.item-details h4 {
-  margin: 0;
-  font-size: 1.1rem;
+.seller-container h2 {
+  margin-top: 0;
+  color: #1976d2;
+  text-align: center;
 }
 
-.item-details p {
-  margin: 5px 0 0;
-  color: #444;
+.seller-container p {
+  text-align: center;
+  color: #555;
+  margin-bottom: 20px;
 }
-.item-card button{
-  margin-top: 8px;
-  background-color:red;
+
+.seller-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.seller-container label {
+  font-weight: bold;
+}
+
+.seller-container input,
+.seller-container textarea,
+.seller-container select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.seller-container .submit {
+  background-color: #1976d2;
   color: white;
+  padding: 10px;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 
+.seller-container .submit:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
 
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .nav-center {
+    margin-top: 10px;
+  }
+  .cart-container {
+    right: 0;
+    width: 100%;
+  }
 }

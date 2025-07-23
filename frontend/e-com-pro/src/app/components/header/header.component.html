@@ -6,8 +6,8 @@
 
   <!-- Search Bar -->
   <div class="nav-center" *ngIf="!isLoginPage">
-    <input type="text" placeholder="Search..." class="search-bar" />
-    <button class="search-btn"><i class="fas fa-search"></i></button>
+    <input type="text" [(ngModel)]="searchValue" placeholder="Search..." class="search-bar" />
+    <button class="search-btn" (click)="onSearch()"><i class="fas fa-search"></i></button>
   </div>
 
   <!-- Profile, Cart, Dropdown -->
@@ -19,7 +19,7 @@
 
     <div class="dropdown-menu" *ngIf="isDropdownOpen">
       <button>Order History</button>
-      <button>Become a Seller</button>
+      <button (click)="sellerButtonClick()">Become a Seller</button>
       <button>About Us</button>
       <button (click)="logout()">Logout</button>
     </div>
@@ -51,5 +51,42 @@
         <strong>Total: ₹{{ total }}</strong>
       </div>
     </div>
+  </div>
+  
+  <div class="seller-container" *ngIf="showSellerForm">
+  <h2>Bcome a Seller</h2>
+  <p>List Your Product Noww!!</p>
+
+  <form (ngSubmit)="addProduct()" #productForm="ngForm">
+    <!-- Image Upload -->
+    <label>Product Image</label>
+    <input type="file" (change)="onImageSelected($event)" required />
+
+    <!-- Product Name -->
+    <label>Product Name</label>
+    <input type="text" [(ngModel)]="newProduct.name" name="name" required />
+
+    <!-- Product Price -->
+    <label>Price (₹)</label>
+    <input type="number" [(ngModel)]="newProduct.price" name="price" required />
+
+    <!-- Product Description -->
+    <label>Description</label>
+    <textarea [(ngModel)]="newProduct.description" name="description" required></textarea>
+
+    <!-- Product Category -->
+    <label>Category</label>
+    <select [(ngModel)]="newProduct.category" name="category" required>
+      <option value="" disabled selected>Select Category</option>
+      <option value="Fruits">Fruits</option>
+      <option value="Vegetables">Vegetables</option>
+      <option value="Dairy">Dairy</option>
+      <option value="Bakery">Bakery</option>
+      <option value="Others">Others</option>
+    </select>
+
+    <!-- Submit Button -->
+    <button class="submit" [disabled]="!productForm.form.valid">Add Product</button>
+  </form>
   </div>
 </nav>

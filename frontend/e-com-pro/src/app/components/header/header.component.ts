@@ -4,6 +4,8 @@ import { filter, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AuthService } from '../auth.service';
 import { CartService, CartItem } from '../../services/cart.service';
+import { HttpClient } from '@angular/common/http';
+import { SearchService } from '../../services/serchService';
 
 @Component({
   selector: 'app-header',
@@ -16,37 +18,52 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isAuthenticated = false;
   isDropdownOpen = false;
   isCartOpen = false;
+  isSeller = false;
+  showSellerForm = false;
+  showAddProductPopup = false;
   cartItemCount = 0;
   cartItems: CartItem[] = [];
   total = 0;
+  searchValue = '';
 
-  private destroy$ = new Subject<void>();
+  private readonly destroy$ = new Subject<void>();
+
+  newProduct = {
+    name: '',
+    price: null,
+    description: '',
+    category: '',
+    image: ''
+  };
 
   constructor(
     private readonly cartService: CartService,
     private readonly authService: AuthService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly http: HttpClient,
+    private readonly searchService: SearchService
   ) {
-    // Detect if current page is login
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
       takeUntil(this.destroy$)
     ).subscribe((event: NavigationEnd) => {
-      this.isLoginPage = (event as NavigationEnd).urlAfterRedirects === '/login';
+      this.isLoginPage = event.urlAfterRedirects === '/login';
     });
   }
 
   ngOnInit() {
-    // Subscribe to auth status
     this.authService.authStatus.pipe(takeUntil(this.destroy$))
       .subscribe(status => this.isAuthenticated = status);
 
-    // Subscribe to cart count
     this.cartService.cartCount$.pipe(takeUntil(this.destroy$))
       .subscribe(count => this.cartItemCount = count);
 
-    // Load initial cart data
     this.loadCart();
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   toggleTheme() {
@@ -54,25 +71,29 @@ export class HeaderComponent implements OnInit, OnDestroy {
     document.body.classList.toggle('dark-theme', this.isDarkTheme);
   }
 
+    onSearch() {
+    this.searchService.setSearchTerm(this.searchValue);
+  }
+
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
+  }
+
+  toggleCart() {
+    this.isCartOpen = !this.isCartOpen;
   }
 
   profileBtnClick() {
     this.router.navigate(['/profile']);
   }
 
-  logout() {
-    this.authService.logout();
-    this.router.navigate(['/login']);
-  }
-
   navigate() {
     this.router.navigate(['/home']);
   }
 
-  toggleCart() {
-    this.isCartOpen = !this.isCartOpen;
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 
   loadCart() {
@@ -95,8 +116,49 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.loadCart();
   }
 
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
+  sellerButtonClick() {
+    this.showSellerForm = !this.showSellerForm;
+  }
+
+  onImageSelected(event: any) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.newProduct.image = reader.result as string;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  addProduct() {
+    console.log(this);
+    if (!this.newProduct.name || !this.newProduct.price || !this.newProduct.description || !this.newProduct.category || !this.newProduct.image) {
+      alert("❗ Please fill all fields");
+      return;
+    }
+
+    this.http.post('http://localhost:5000/api/products', this.newProduct).subscribe({
+      next: (res) => {
+        console.log('✅ Product added:', res);
+        alert('✅ Product added successfully!');
+        this.resetProductForm();
+      },
+      error: (err) => {
+        console.error('❌ Upload failed:', err);
+        alert('❌ Failed to upload product');
+      }
+    });
+  }
+
+  resetProductForm() {
+    this.showAddProductPopup = false;
+    this.newProduct = {
+      name: '',
+      price: null,
+      description: '',
+      category: '',
+      image: ''
+    };
   }
 }

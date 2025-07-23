@@ -8,10 +8,10 @@
 
   <!-- Product Grid -->
   <div class="product-grid">
-    <!-- ✅ Loop through dynamic MongoDB products -->
+    <!-- ✅ Loop through filtered products -->
     <mat-card 
       class="product-card" 
-      *ngFor="let product of products" 
+      *ngFor="let product of filteredProducts" 
       [@fadeInAnimation]
       style="width: 200px; height:auto; object-fit: cover;"> <!-- ✅ Animation remains -->
 

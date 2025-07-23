@@ -12,15 +12,21 @@ const getProducts = async (req, res) => {
 
 // Add new product
 const addProduct = async (req, res) => {
-  const { name, price, image, category } = req.body;
-  
-  const newProduct = new Product({ name, price, image, category });
-
   try {
+    const { name, price, image, description, category } = req.body;
+
+    // Input validation
+    if (!name || !price || !image || !description || !category) {
+      return res.status(400).json({ message: 'All fields are required.' });
+    }
+
+    const newProduct = new Product({ name, price, image, description, category });
+
     const savedProduct = await newProduct.save();
     res.status(201).json(savedProduct);
   } catch (err) {
-    res.status(400).json({ message: err.message });
+    console.error('Error saving product:', err);
+    res.status(500).json({ message: 'Server error' });
   }
 };
 
