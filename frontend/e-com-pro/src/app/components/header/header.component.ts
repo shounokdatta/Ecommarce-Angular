@@ -16,6 +16,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isAuthenticated = false;
   isDropdownOpen = false;
   isCartOpen = false;
+  isSeller = false; // Assuming you have a way to determine if the user is a seller
+  showSellerForm: boolean = false;
+  showAddProductPopup = false;
   cartItemCount = 0;
   cartItems: CartItem[] = [];
   total = 0;
@@ -99,4 +102,43 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
   }
+sellerButtonClick() {
+  this.showSellerForm = !this.showSellerForm;
+}
+
+newProduct = {
+  name: '',
+  price: null,
+  description: '',
+  category: '',
+  image: ''
+};
+
+
+onImageSelected(event: any) {
+  const file = event.target.files[0];
+  const reader = new FileReader();
+  reader.onload = () => {
+    this.newProduct.image = reader.result as string;
+  };
+  reader.readAsDataURL(file);
+}
+
+addProduct() {
+  console.log('Product Added:', this.newProduct);
+  // Here, you would typically send the product to the backend
+  alert('Product added successfully!');
+  this.showSellerForm = false;
+  // Optionally reset the form
+  this.newProduct = {
+    name: '',
+    price: null,
+    description: '',
+    category: '',
+    image: ''
+  };
+}
+toggleSellerForm() {
+  this.showAddProductPopup = !this.showAddProductPopup;
+}
 }

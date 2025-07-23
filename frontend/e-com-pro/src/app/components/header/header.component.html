@@ -1,6 +1,9 @@
+
+
+<!-- Navigation Bar -->
 <nav class="navbar">
   <div class="nav-left">
-    <img src="logo-url" alt="Logo" class="logo" (click)="navigate()"/>
+    <img src="logo-url" alt="Logo" class="logo" (click)="navigate()" />
     <span class="site-name">GreenCart</span>
   </div>
 
@@ -19,13 +22,13 @@
 
     <div class="dropdown-menu" *ngIf="isDropdownOpen">
       <button>Order History</button>
-      <button>Become a Seller</button>
+      <button class="seller-button" (click)="sellerButtonClick()">Become a Seller</button>
       <button>About Us</button>
       <button (click)="logout()">Logout</button>
     </div>
 
     <!-- Profile Button -->
-    <img src="profile-url" alt="Profile" class="profile" (click)="profileBtnClick()"/>
+    <img src="profile-url" alt="Profile" class="profile" (click)="profileBtnClick()" />
 
     <!-- Cart Button -->
     <button class="icon-button" (click)="toggleCart()">
@@ -36,7 +39,7 @@
     <!-- Cart Items -->
     <div class="cart-container" *ngIf="isCartOpen">
       <div *ngFor="let item of cartItems" class="item-card">
-        <img [src]="item.image" alt="" class="item-img">
+        <img [src]="item.image" alt="" class="item-img" />
         <div class="item-details">
           <h4>{{ item.name }}</h4>
           <p>{{ item.price }}</p>
@@ -53,3 +56,40 @@
     </div>
   </div>
 </nav>
+<!-- Seller Product Upload Container: Appears at the top -->
+<div class="seller-container" *ngIf="showSellerForm">
+  <h2>Bcome a Seller</h2>
+  <p>List Your Product Noww!!</p>
+
+  <form (ngSubmit)="addProduct()" #productForm="ngForm">
+    <!-- Image Upload -->
+    <label>Product Image</label>
+    <input type="file" (change)="onImageSelected($event)" required />
+
+    <!-- Product Name -->
+    <label>Product Name</label>
+    <input type="text" [(ngModel)]="newProduct.name" name="name" required />
+
+    <!-- Product Price -->
+    <label>Price (₹)</label>
+    <input type="number" [(ngModel)]="newProduct.price" name="price" required />
+
+    <!-- Product Description -->
+    <label>Description</label>
+    <textarea [(ngModel)]="newProduct.description" name="description" required></textarea>
+
+    <!-- Product Category -->
+    <label>Category</label>
+    <select [(ngModel)]="newProduct.category" name="category" required>
+      <option value="" disabled selected>Select Category</option>
+      <option value="Fruits">Fruits</option>
+      <option value="Vegetables">Vegetables</option>
+      <option value="Dairy">Dairy</option>
+      <option value="Bakery">Bakery</option>
+      <option value="Others">Others</option>
+    </select>
+
+    <!-- Submit Button -->
+    <button class="submit" [disabled]="!productForm.form.valid">Add Product</button>
+  </form>
+</div>
