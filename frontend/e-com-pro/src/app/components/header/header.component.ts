@@ -72,6 +72,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
     onSearch() {
+      console.log(this.searchValue);
     this.searchService.setSearchTerm(this.searchValue);
   }
 

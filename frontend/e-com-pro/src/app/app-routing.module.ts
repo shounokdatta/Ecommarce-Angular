@@ -15,8 +15,8 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
 
   // Protected Routes
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
+  { path: 'profile', component: ProfileComponent,canActivate: [AuthGuard] },
 
   // Wildcard Route
   { path: '**', redirectTo: 'login' }

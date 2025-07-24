@@ -8,10 +8,10 @@ import { AuthService } from './components/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  constructor(private readonly authService: AuthService, private router: Router) {}
+  constructor(private readonly authService: AuthService, private readonly router: Router) {}
 
   ngOnInit() {
-    if (!this.authService.isLoggedIn()) {
+    if (true) {
       this.router.navigate(['/login']);
     }
   }

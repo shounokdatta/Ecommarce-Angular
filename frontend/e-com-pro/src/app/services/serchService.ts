@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class SearchService {
-  private searchTerm = new BehaviorSubject<string>('');
+  private readonly searchTerm = new BehaviorSubject<string>('');
   searchTerm$ = this.searchTerm.asObservable();
 
   setSearchTerm(term: string) {

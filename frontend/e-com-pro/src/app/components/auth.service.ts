@@ -20,6 +20,7 @@ export class AuthService {
 
   register(email: string, password: string): void {
     this.newUsers.push({ email, password });
+    alert("Sign Up sucessfull")
     console.log('User registered:', email);
   }
 
