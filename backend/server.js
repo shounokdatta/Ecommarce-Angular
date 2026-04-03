@@ -15,7 +15,7 @@ app.use(cors());
 app.use(express.json()); // Parses incoming JSON
 
 // Routes
-app.use('/api/products', productRoutes);
+app.use('/api', productRoutes);
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGO_URI, {

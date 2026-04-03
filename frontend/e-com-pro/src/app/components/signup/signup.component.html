@@ -4,34 +4,43 @@
     <p class="signup-subtitle">Join us today!</p>
 
     <form #signupForm="ngForm" (ngSubmit)="onSignup()" novalidate>
-      <div class="input-group">
-        <span class="icon">📧</span>
-        <input type="email" placeholder="Enter Email"
-               [(ngModel)]="email" name="email"
-               required email #emailRef="ngModel" />
-      </div>
-      <div class="error" *ngIf="emailRef.invalid && emailRef.touched">
-        <span *ngIf="emailRef.errors?.['required']">Email is required.</span>
-        <span *ngIf="emailRef.errors?.['email']">Invalid email format.</span>
+      <!-- Name -->
+      <input type="text" placeholder="Name"
+        [(ngModel)]="name" name="name"
+        required minlength="3" #nameRef="ngModel" />
+      <div *ngIf="nameRef.invalid && nameRef.touched">
+        Name required (min 3)
       </div>
 
-      <div class="input-group">
-        <span class="icon">🔒</span>
-        <input [type]="showPassword ? 'text' : 'password'"
-               placeholder="Create Password"
-               [(ngModel)]="password" name="password"
-               required minlength="7" #passRef="ngModel" />
-      </div>
-      <div class="error" *ngIf="passRef.invalid && passRef.touched">
-        <span *ngIf="passRef.errors?.['required']">Password is required.</span>
-        <span *ngIf="passRef.errors?.['minlength']">Min 7 characters.</span>
+      <!-- Email -->
+      <input type="email" placeholder="Email"
+        [(ngModel)]="email" name="email"
+        required email #emailRef="ngModel" />
+      <div *ngIf="emailRef.invalid && emailRef.touched">
+        Valid email required
       </div>
 
+      <!-- Phone -->
+      <input type="tel" placeholder="Phone"
+        [(ngModel)]="phone" name="phone"
+        required pattern="^[0-9]{10}$" #phoneRef="ngModel" />
+      <div *ngIf="phoneRef.invalid && phoneRef.touched">
+        10 digit phone required
+      </div>
+
+      <!-- Password -->
+      <input type="password" placeholder="Password"
+        [(ngModel)]="password" name="password"
+        required minlength="7" #passRef="ngModel" />
+      <div *ngIf="passRef.invalid && passRef.touched">
+        Min 7 characters
+      </div>
+      <!-- Submit -->
       <button type="submit" class="signup-button" [disabled]="signupForm.invalid">
         Sign Up
       </button>
     </form>
 
-    <p class="login-link">Already have an account? <a routerLink="/login">Login</a></p>
-  </div>
+<p class="login-link">Already have an account? <a routerLink="/login">Login</a></p> 
+</div> 
 </div>

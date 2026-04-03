@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms'; // ✅ Import this
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http'; // ✅ Import this
 
 
 // Import your components here
@@ -13,13 +12,15 @@ import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-
+import { HttpClientModule } from '@angular/common/http';
 // Import Angular Material modules
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { SignupComponent } from './components/signup/signup.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -36,11 +37,14 @@ import { ProfileComponent } from './components/profile/profile.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule, // ✅ Add this to imports
+    FormsModule,
     MatCardModule,
     MatIconModule,
     MatButtonModule,
-    HttpClientModule,
+    BrowserAnimationsModule,
+     HttpClientModule ,  
+    ToastrModule.forRoot({ positionClass: 'toast-top-right',
+      timeOut: 3000})
   ],
   providers: [
     provideAnimationsAsync()

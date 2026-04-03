@@ -5,13 +5,13 @@
   </div>
 
   <!-- Search Bar -->
-  <div class="nav-center" *ngIf="!isLoginPage">
+  <div class="nav-center" *ngIf="!isLoginPage && !isSginupPage">
     <input type="text" [(ngModel)]="searchValue" placeholder="Search..." class="search-bar" />
     <button class="search-btn" (click)="onSearch()"><i class="fas fa-search"></i></button>
   </div>
 
   <!-- Profile, Cart, Dropdown -->
-  <div class="nav-right" *ngIf="!isLoginPage">
+  <div class="nav-center" *ngIf="!isLoginPage && !isSginupPage">
     <!-- Dropdown Menu -->
     <button class="icon-button" (click)="toggleDropdown()">
       <i class="fas fa-ellipsis-v"></i>

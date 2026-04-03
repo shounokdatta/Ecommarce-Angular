@@ -15,6 +15,7 @@ import { SearchService } from '../../services/serchService';
 export class HeaderComponent implements OnInit, OnDestroy {
   isDarkTheme = false;
   isLoginPage = false;
+  isSginupPage = false;
   isAuthenticated = false;
   isDropdownOpen = false;
   isCartOpen = false;
@@ -42,12 +43,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private readonly router: Router,
     private readonly http: HttpClient,
     private readonly searchService: SearchService
-  ) {
+  )
+   {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
       takeUntil(this.destroy$)
     ).subscribe((event: NavigationEnd) => {
       this.isLoginPage = event.urlAfterRedirects === '/login';
+      this.isSginupPage = event.urlAfterRedirects === '/signup';
     });
   }
 
