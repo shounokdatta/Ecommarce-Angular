@@ -15,7 +15,7 @@ export interface Product {
 })
 export class ProductService {
 
-  private readonly apiUrl = 'http://localhost:5000/api/'; 
+  private readonly apiUrl = 'https://ecommarce-angular-1.onrender.com/api/'; 
 
   constructor(private readonly http: HttpClient) { }
 

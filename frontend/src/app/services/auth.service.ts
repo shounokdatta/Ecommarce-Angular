@@ -26,12 +26,12 @@ export class AuthService {
     phone: phone,
     password: password
   };
-  return this.http.post('http://localhost:5000/api/signup', userData);
+  return this.http.post('https://ecommarce-angular-1.onrender.com/api/signup', userData);
 }
   
 
   login(email: string, password: string) {
-  const res= this.http.post('http://localhost:5000/api/login', {
+  const res= this.http.post('https://ecommarce-angular-1.onrender.com/api/login', {
     email,
     password
   });

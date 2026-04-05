@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../services/auth.service';
 import { CartService, CartItem } from '../../services/cart.service';
 import { HttpClient } from '@angular/common/http';
 import { SearchService } from '../../services/serchService';
