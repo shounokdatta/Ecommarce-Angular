@@ -1,4 +1,4 @@
-#Ecommarce-Angular
+# Ecommarce-Angular
 A full-stack e-commerce application built with the MEAN stack (MongoDB, Express, Angular, and Node.js). This project features a modular architecture with a dedicated backend API and a responsive Angular frontend.
 
 🚀 Live Demo
